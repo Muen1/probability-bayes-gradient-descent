@@ -63,3 +63,43 @@ def gradient_descent_4_iterations(X, Y, m_init=0.0, b_init=0.0, lr=0.01):
         print(f"  Error = {error:.4f}\n")
 
     return m, b, history
+
+# -----------------------------
+# MODULE 6: Visualization
+# -----------------------------
+def plot_history(history):
+    iterations = range(1, 5)
+
+    # Plot m and b
+    plt.figure(figsize=(12, 5))
+    plt.subplot(1, 2, 1)
+    plt.plot(iterations, history["m"], marker='o', label='m')
+    plt.plot(iterations, history["b"], marker='s', label='b')
+    plt.xlabel("Iteration")
+    plt.ylabel("Parameter Value")
+    plt.title("Parameter Updates (m and b) Over Iterations")
+    plt.legend()
+    plt.grid(True)
+
+    # Plot Error
+    plt.subplot(1, 2, 2)
+    plt.plot(iterations, history["error"], color='red', marker='x')
+    plt.xlabel("Iteration")
+    plt.ylabel("Mean Squared Error")
+    plt.title("Error Over Iterations")
+    plt.grid(True)
+
+    plt.tight_layout()
+    plt.show()
+
+# -----------------------------
+# MODULE 7: Main runner
+# -----------------------------
+def main():
+    X, Y = load_data()
+    m_final, b_final, history = gradient_descent_4_iterations(X, Y, lr=0.01)
+    
+    print(f"Final values after 4 iterations: m = {m_final:.4f}, b = {b_final:.4f}")
+    print(f"Final predictions: {history['predictions'][-1]}")
+
+    plot_history(history)
